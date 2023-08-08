@@ -104,6 +104,9 @@ module storageAccountDeployment 'modules/storage-account.bicep' = {
 
 module sqlDeployment 'modules/sql.bicep' = {
   name: 'sql'
+  dependsOn: [
+    vnetDeployment
+  ]
   params: {
     config: sqlConfig
     location: location
@@ -116,6 +119,9 @@ module sqlDeployment 'modules/sql.bicep' = {
 
 module cache 'modules/redis.bicep' = {
   name: 'cache'
+  dependsOn: [
+    vnetDeployment
+  ]
   params: {
     location: location
     name: redisConfig.name
@@ -130,6 +136,10 @@ module cache 'modules/redis.bicep' = {
 
 module webAppDeployment 'modules/web-app.bicep' = {
   name: 'web-app'
+  dependsOn: [
+    sqlDeployment
+    cache
+  ]
   params: {
     appPlan: appPlan
     cacheName: redisConfig.name
