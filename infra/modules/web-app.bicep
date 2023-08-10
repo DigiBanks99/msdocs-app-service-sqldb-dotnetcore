@@ -140,6 +140,7 @@ resource appsettings 'Microsoft.Web/sites/config@2019-08-01' = {
   name: 'appsettings'
   parent: webAppResource
   properties: {
+    ASPNETCORE_ENVIRONMENT: 'Development'
     WEBSITE_VNET_ROUTE_ALL: '1'
   }
 }
