@@ -8,12 +8,8 @@ builder.Services.AddDbContext<MyDatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    var f = LoggerFactory.Create(x => x.AddConsole());
-    var l = f.CreateLogger("Bootstrap");
     options.Configuration = builder.Configuration.GetConnectionString("AZURE_REDIS_CONNECTIONSTRING");
     options.InstanceName = "SampleInstance";
-    
-    l.LogInformation("Redis: {ConnectionString}", options.Configuration);
 });
 
 // Add services to the container.
