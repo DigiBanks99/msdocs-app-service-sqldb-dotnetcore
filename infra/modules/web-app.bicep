@@ -65,6 +65,12 @@ var siteConfig = {
   ftpsState: 'Disabled'
   http20Enabled: true
   linuxFxVersion: appPlan.os == 'linux' ? webApp.runtime : null
+  metadata: [
+    {
+      name: 'CURRENT_STACK'
+      value: 'dotnetcore'
+    }
+  ]
   minTlsVersion: '1.2'
   netFrameworkVersion: 'v7.0'
   webSocketsEnabled: true
@@ -80,14 +86,7 @@ resource webAppResource 'Microsoft.Web/sites@2022-09-01' = {
   properties: {
     httpsOnly: true
     serverFarmId: appPlanResource.id
-    siteConfig: {
-      metadata: [
-        {
-          name: 'CURRENT_STACK'
-          value: 'dotnetcore'
-        }
-      ]
-    }
+    siteConfig: siteConfig
   }
 }
 
